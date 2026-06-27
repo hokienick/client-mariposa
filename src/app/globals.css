@@ -1,36 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAF8F4;
-  --foreground: #2C1810;
-  --surface: #F5E6D3;
-  --muted: #6B4F3A;
-  --accent: #D4634A;
-  --accent-hover: #BC4F38;
-  --border: #E8D8C4;
+  /* ── Palette (OKLCH) ────────────────────────────────── */
+  --bg:       oklch(1.000 0.000 0);          /* pure white */
+  --surface:  oklch(0.965 0.004 290);        /* near-white, faint violet */
+  --ink:      oklch(0.155 0.025 290);        /* near-black, violet-tinted */
+  --muted:    oklch(0.480 0.030 290);        /* mid violet-gray ≥4.5:1 on white */
+  --primary:  oklch(0.295 0.115 290);        /* deep blackberry/eggplant */
+  --accent:   oklch(0.720 0.130 55);         /* warm amber/honey */
+  --on-primary: oklch(1.000 0.000 0);        /* white on primary fills */
+  --on-accent: oklch(0.155 0.025 290);       /* dark ink on accent fills */
+  --border:   oklch(0.890 0.008 290);        /* subtle violet-tinted rule */
 
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  /* ── Easing ─────────────────────────────────────────── */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out:    cubic-bezier(0.77, 0, 0.175, 1);
 
+  /* ── Z-index scale ───────────────────────────────────── */
   --z-dropdown: 100;
-  --z-sticky: 200;
+  --z-sticky:   200;
   --z-modal-backdrop: 300;
-  --z-modal: 400;
-  --z-toast: 500;
+  --z-modal:    400;
+  --z-toast:    500;
+  --z-tooltip:  600;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-surface: var(--surface);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-border: var(--border);
-  --font-display: "Cabinet Grotesk", system-ui, sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Outfit", system-ui, sans-serif;
+  --color-bg:         var(--bg);
+  --color-surface:    var(--surface);
+  --color-ink:        var(--ink);
+  --color-muted:      var(--muted);
+  --color-primary:    var(--primary);
+  --color-accent:     var(--accent);
+  --color-on-primary: var(--on-primary);
+  --color-on-accent:  var(--on-accent);
+  --color-border:     var(--border);
+  --font-display: "Bitter", Georgia, serif;
+  --font-sans:    "Barlow", system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -41,24 +47,26 @@
   }
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Barlow", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Cabinet Grotesk", system-ui, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+h1, h2, h3, h4 {
+  font-family: "Bitter", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
+
+p { max-width: 65ch; }
+p.wide { max-width: none; }

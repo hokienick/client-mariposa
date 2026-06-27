@@ -1,178 +1,123 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 
-const featuredFlavors = [
-  { name: "Heath Butter Toffee", tag: "Fan Favorite" },
-  { name: "Mexican Chocolate", tag: "House Specialty" },
-  { name: "Coconut Almond Fudge", tag: "Classic" },
-  { name: "Mint Chip", tag: "Classic" },
-  { name: "Vegan Mango Sorbet", tag: "Vegan" },
-  { name: "Cookies & Cream", tag: "Classic" },
-];
-
-const tagColors: Record<string, string> = {
-  "Fan Favorite": "#D4634A",
-  "House Specialty": "#8B4513",
-  "Classic": "#6B4F3A",
-  "Vegan": "#4A7C59",
-};
+const ease = [0.25, 1, 0.5, 1] as const;
 
 const facts = [
-  {
-    icon: "🥛",
-    title: "Fresh local dairy",
-    body: "We source fresh milk and cream from local California dairies every week.",
-  },
-  {
-    icon: "✋",
-    title: "Made by hand",
-    body: "Every batch is made in-house using the same technique Grandpa Pete taught Dick at age 12.",
-  },
-  {
-    icon: "🌱",
-    title: "No gimmicks",
-    body: "No eggs in most flavors, one-third less sugar, half the air. Just ice cream.",
-  },
+  { label: "No eggs in most flavors", detail: "Cleaner, lighter — no compromise on richness." },
+  { label: "One-third less sugar", detail: "Compared to commercial ice cream. You taste the dairy, not the sweetener." },
+  { label: "Half the air", detail: "Denser scoops. What you're paying for is actually there." },
+  { label: "Fresh local dairy", detail: "Sourced weekly from California dairies. Not a powder, not a mix." },
 ];
 
-const press = [
-  {
-    outlet: "The New York Times",
-    quote: "A must-visit when in San Diego.",
-  },
-  {
-    outlet: "San Diego Magazine",
-    quote: "Best Ice Cream in San Diego.",
-    note: "Multiple years",
-  },
+const todaysFlavors = [
+  "Heath Butter Toffee",
+  "Mexican Chocolate",
+  "Coconut Almond Fudge",
+  "Mint Chip",
+  "Cookies & Cream",
+  "Rocky Road",
+  "Strawberry",
+  "Banana Walnut",
+  "Vegan Mango Sorbet",
+  "Vegan Cookies & Cream",
+  "Coffee",
+  "Vanilla",
 ];
-
-function fadeProps(i: number) {
-  return {
-    initial: { opacity: 0, y: 24 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true as const, margin: "-60px" },
-    transition: { delay: i * 0.08, duration: 0.55, ease: "easeOut" as const },
-  };
-}
 
 export default function Home() {
   return (
     <div>
-      {/* Hero */}
-      <section
-        className="relative min-h-[calc(100vh-64px)] flex flex-col justify-center px-6 overflow-hidden"
-        style={{ background: "var(--background)" }}
-      >
+      {/* ── Hero: split layout ── */}
+      <section className="grid grid-cols-1 md:grid-cols-2 min-h-[calc(100vh-64px)]">
+        {/* Left: dark eggplant */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, var(--foreground) 1px, transparent 0)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-        <div
-          className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-10 translate-x-1/3 -translate-y-1/4"
-          style={{ background: "var(--accent)" }}
-        />
-
-        <div className="relative max-w-6xl mx-auto w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+          className="flex flex-col justify-center px-8 md:px-14 py-16 md:py-24 order-2 md:order-1"
+          style={{ background: "var(--primary)" }}
+        >
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-semibold uppercase tracking-widest mb-8"
-            style={{
-              borderColor: "var(--accent)",
-              color: "var(--accent)",
-            }}
+            className="text-xs font-semibold uppercase tracking-[0.14em] mb-8"
+            style={{ color: "oklch(0.58 0.09 290)" }}
           >
-            25 Years in Normal Heights
-          </motion.div>
+            Normal Heights, San Diego · Est. 2000
+          </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.08, ease: "easeOut" }}
-            className="text-[clamp(3rem,8vw,7rem)] leading-[0.95] mb-6 max-w-3xl"
-            style={{
-              fontFamily: "var(--font-serif)",
-              color: "var(--foreground)",
-              letterSpacing: "-0.02em",
-            }}
+            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+            className="text-[clamp(2.6rem,5vw,4.5rem)] leading-[1.05] mb-6"
+            style={{ color: "var(--on-primary)", fontFamily: "var(--font-display)", letterSpacing: "-0.03em" }}
           >
-            Good ice cream needs no introduction.
+            25 years.<br />
+            No&nbsp;gimmicks.<br />
+            Just&nbsp;ice&nbsp;cream.
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.18, ease: "easeOut" }}
-            className="text-lg max-w-md mb-10 leading-relaxed"
-            style={{ color: "var(--muted)" }}
+            transition={{ duration: 0.6, delay: 0.22, ease: "easeOut" }}
+            className="text-base leading-relaxed mb-10"
+            style={{ color: "oklch(0.78 0.05 290)", maxWidth: "38ch" }}
           >
-            Handmade on Adams Avenue since 2000. No gimmicks, no mix-ins. Just ice cream made the way Grandpa taught us.
+            Handmade on Adams Avenue since 2000. Fresh local dairy, made by the same family who learned from Grandpa Pete.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.26, ease: "easeOut" }}
-            className="flex flex-wrap gap-4 items-center"
+            transition={{ duration: 0.5, delay: 0.34, ease: "easeOut" }}
+            className="flex flex-wrap gap-3"
           >
             <Link
               href="/flavors"
-              className="px-6 py-3 rounded-full font-semibold text-sm transition-all hover:opacity-90 active:scale-[0.98]"
-              style={{ background: "var(--accent)", color: "#fff" }}
+              className="px-6 py-3 rounded text-sm font-semibold transition-opacity hover:opacity-90 active:scale-[0.98]"
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
               See Today's Flavors
             </Link>
             <Link
               href="/location"
-              className="px-6 py-3 rounded-full font-semibold text-sm border transition-colors"
-              style={{
-                borderColor: "var(--border)",
-                color: "var(--foreground)",
-              }}
+              className="px-6 py-3 rounded text-sm font-medium border transition-colors"
+              style={{ borderColor: "oklch(0.42 0.09 290)", color: "oklch(0.82 0.04 290)" }}
             >
               Hours & Location
             </Link>
           </motion.div>
+        </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-14 inline-flex items-center gap-3 px-4 py-3 rounded-xl text-sm"
-            style={{ background: "var(--surface)" }}
-          >
-            <span style={{ color: "var(--accent)" }}>★</span>
-            <span style={{ color: "var(--muted)" }}>
-              First visit? Mention this site for{" "}
-              <strong style={{ color: "var(--foreground)" }}>10% off your first scoop.</strong>
-            </span>
-          </motion.div>
+        {/* Right: hero image */}
+        <div className="relative min-h-[50vw] md:min-h-0 order-1 md:order-2 overflow-hidden">
+          <Image
+            src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=1200&q=85"
+            alt="Colorful handmade ice cream cones with berries and flowers"
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
         </div>
       </section>
 
-      {/* Press strip */}
-      <section style={{ background: "var(--foreground)" }}>
-        <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row gap-8 md:gap-0 md:divide-x divide-[#3D2418]">
-          {press.map((p) => (
+      {/* ── Press: dark strip ── */}
+      <section style={{ background: "oklch(0.22 0.07 290)" }}>
+        <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row gap-10 md:gap-0 md:divide-x" style={{ "--tw-divide-opacity": 1 } as React.CSSProperties}>
+          {[
+            { outlet: "The New York Times", quote: "A must-visit when in San Diego." },
+            { outlet: "San Diego Magazine", quote: "Best Ice Cream in San Diego.", note: "Multiple years running" },
+          ].map((p) => (
             <div key={p.outlet} className="flex-1 md:px-10 first:pl-0 last:pr-0">
-              <p
-                className="text-xs font-semibold uppercase tracking-widest mb-2"
-                style={{ color: "var(--accent)" }}
-              >
+              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] mb-2" style={{ color: "var(--accent)" }}>
                 {p.outlet}
-                {p.note && <span className="ml-2 opacity-60 normal-case tracking-normal font-normal">{p.note}</span>}
+                {p.note && <span className="ml-2 opacity-50 normal-case tracking-normal font-normal">{p.note}</span>}
               </p>
-              <p
-                className="text-xl font-bold leading-snug"
-                style={{ color: "#FAF8F4", fontFamily: "var(--font-display)" }}
-              >
+              <p className="text-xl font-bold leading-snug" style={{ color: "var(--on-primary)", fontFamily: "var(--font-display)" }}>
                 "{p.quote}"
               </p>
             </div>
@@ -180,166 +125,146 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Flavors */}
+      {/* ── Today's flavors: editorial list ── */}
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="flex items-end justify-between mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
           <div>
-            <p
-              className="text-xs font-semibold uppercase tracking-widest mb-2"
-              style={{ color: "var(--accent)" }}
-            >
-              In the case today
-            </p>
-            <h2 className="text-4xl" style={{ fontFamily: "var(--font-display)" }}>
-              Featured Flavors
+            <h2 className="text-[clamp(2rem,4vw,3.25rem)] mb-3" style={{ fontFamily: "var(--font-display)" }}>
+              What's in the case today
             </h2>
-          </div>
-          <Link
-            href="/flavors"
-            className="text-sm font-semibold hidden md:block"
-            style={{ color: "var(--accent)" }}
-          >
-            View all 48 flavors &rarr;
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {featuredFlavors.map((flavor, i) => (
-            <motion.div
-              key={flavor.name}
-              {...fadeProps(i)}
-              className="p-6 rounded-2xl border transition-shadow hover:shadow-md"
-              style={{
-                borderColor: "var(--border)",
-                background: "var(--background)",
-              }}
+            <p className="text-base mb-8" style={{ color: "var(--muted)" }}>
+              The rotation changes. Call ahead or just show up and be surprised.
+            </p>
+            <Link
+              href="/flavors"
+              className="inline-flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-75"
+              style={{ color: "var(--primary)" }}
             >
-              <span
-                className="inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full mb-4"
-                style={{
-                  background: tagColors[flavor.tag] + "18",
-                  color: tagColors[flavor.tag],
-                }}
-              >
-                {flavor.tag}
-              </span>
-              <p
-                className="text-lg font-bold leading-snug"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {flavor.name}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+              Full flavor list (48 total) &rarr;
+            </Link>
+          </div>
 
-        <div className="mt-6 md:hidden text-center">
-          <Link
-            href="/flavors"
-            className="text-sm font-semibold"
-            style={{ color: "var(--accent)" }}
-          >
-            View all 48 flavors &rarr;
-          </Link>
-        </div>
-      </section>
-
-      {/* Philosophy */}
-      <section style={{ background: "var(--surface)" }}>
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-3"
-            style={{ color: "var(--accent)" }}
-          >
-            Why it tastes different
-          </p>
-          <h2 className="text-4xl mb-12 max-w-xl" style={{ fontFamily: "var(--font-display)" }}>
-            The cold facts
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {facts.map((fact, i) => (
-              <motion.div
-                key={fact.title}
-                {...fadeProps(i)}
+          <div>
+            {todaysFlavors.map((name, i) => (
+              <div
+                key={name}
+                className="flex items-center justify-between py-3 border-b"
+                style={{ borderColor: "var(--border)" }}
               >
-                <div className="text-3xl mb-4">{fact.icon}</div>
-                <h3 className="text-xl mb-3" style={{ fontFamily: "var(--font-display)" }}>
-                  {fact.title}
-                </h3>
-                <p className="text-base leading-relaxed" style={{ color: "var(--muted)" }}>
-                  {fact.body}
-                </p>
-              </motion.div>
+                <span className="text-base font-medium" style={{ fontFamily: "var(--font-sans)" }}>
+                  {name}
+                </span>
+                {name.startsWith("Vegan") && (
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded"
+                    style={{ background: "oklch(0.88 0.06 155)", color: "oklch(0.30 0.09 155)" }}
+                  >
+                    Vegan
+                  </span>
+                )}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Heritage callout */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.65, ease: "easeOut" }}
-          className="rounded-3xl p-10 md:p-16 relative overflow-hidden"
-          style={{ background: "var(--foreground)" }}
-        >
-          <div
-            className="absolute top-0 right-0 w-80 h-80 rounded-full opacity-5 translate-x-1/4 -translate-y-1/4"
-            style={{ background: "var(--accent)" }}
+      {/* ── The cold facts: ruled list on surface ── */}
+      <section style={{ background: "var(--surface)" }}>
+        <div className="max-w-6xl mx-auto px-6 py-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+            <div>
+              <h2 className="text-[clamp(2rem,4vw,3.25rem)] mb-4" style={{ fontFamily: "var(--font-display)" }}>
+                The cold facts
+              </h2>
+              <p className="text-base leading-relaxed" style={{ color: "var(--muted)" }}>
+                What makes Mariposa different isn't a story we tell. It's what we don't put in.
+              </p>
+            </div>
+            <div>
+              {facts.map((f, i) => (
+                <motion.div
+                  key={f.label}
+                  initial={{ opacity: 0, x: 16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: i * 0.07, ease: "easeOut" }}
+                  className="py-5 border-b"
+                  style={{ borderColor: "var(--border)" }}
+                >
+                  <p className="text-base font-semibold mb-1" style={{ fontFamily: "var(--font-display)" }}>
+                    {f.label}
+                  </p>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                    {f.detail}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Heritage: image + quote ── */}
+      <section className="grid grid-cols-1 md:grid-cols-2">
+        <div className="relative min-h-[340px] overflow-hidden">
+          <Image
+            src="https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=900&q=85"
+            alt="Blackberry and berry ice cream bars on parchment paper"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
-          <p
-            className="text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ color: "var(--accent)" }}
-          >
-            Our story
-          </p>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col justify-center px-8 md:px-14 py-14"
+          style={{ background: "var(--primary)" }}
+        >
           <blockquote
-            className="text-[clamp(1.5rem,4vw,2.75rem)] font-bold leading-tight mb-6 max-w-2xl relative"
-            style={{ color: "#FAF8F4", fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
+            className="text-[clamp(1.35rem,2.8vw,2.1rem)] font-bold leading-snug mb-6"
+            style={{ color: "var(--on-primary)", fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
           >
-            "Grandpa told him it's very simple. Fresh milk, good cream, quality ingredients."
+            "Grandpa Pete told him it's simple. Fresh milk, good cream, quality ingredients. The rest takes care of itself."
           </blockquote>
-          <p className="text-sm mb-8" style={{ color: "#9E8878" }}>
-            Dick VanRansom, founder. Fourth-generation Dutch dairy farmer. Still making every batch by hand.
+          <p className="text-sm mb-8" style={{ color: "oklch(0.65 0.06 290)" }}>
+            Dick VanRansom, founder. Fourth-generation Dutch dairy farmer. Still making every batch the same way.
           </p>
           <Link
             href="/about"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border transition-colors"
-            style={{ borderColor: "#4D3020", color: "#FAF8F4" }}
+            className="inline-flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-75"
+            style={{ color: "var(--accent)" }}
           >
-            Read our story &rarr;
+            The full story &rarr;
           </Link>
         </motion.div>
       </section>
 
-      {/* Hours CTA */}
-      <section
-        className="border-t"
-        style={{ borderColor: "var(--border)", background: "var(--surface)" }}
-      >
-        <div className="max-w-6xl mx-auto px-6 py-14 flex flex-col md:flex-row items-center justify-between gap-6">
+      {/* ── Hours bar ── */}
+      <section className="border-t" style={{ borderColor: "var(--border)" }}>
+        <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <h2 className="text-2xl mb-1" style={{ fontFamily: "var(--font-display)" }}>
-              Come find us on Adams Avenue
+            <h2 className="text-xl font-bold mb-1" style={{ fontFamily: "var(--font-display)" }}>
+              3450 Adams Avenue, Normal Heights
             </h2>
             <p className="text-sm" style={{ color: "var(--muted)" }}>
-              3450 Adams Avenue, Normal Heights, San Diego. Thu-Sat 1-9pm, Sun 2-8pm.
+              Thu – Sat &nbsp;1pm – 9pm &nbsp;&nbsp; Sun &nbsp;2pm – 8pm &nbsp;&nbsp; Mon – Wed &nbsp;Closed
             </p>
           </div>
-          <div className="flex gap-3 flex-shrink-0">
+          <div className="flex gap-3 shrink-0">
             <a
               href="tel:6192845197"
-              className="px-5 py-2.5 rounded-full text-sm font-semibold border"
-              style={{ borderColor: "var(--border)", color: "var(--foreground)" }}
+              className="px-5 py-2.5 rounded border text-sm font-medium transition-colors hover:border-ink"
+              style={{ borderColor: "var(--border)", color: "var(--ink)" }}
             >
               Call ahead
             </a>
             <Link
               href="/location"
-              className="px-5 py-2.5 rounded-full text-sm font-semibold"
-              style={{ background: "var(--accent)", color: "#fff" }}
+              className="px-5 py-2.5 rounded text-sm font-semibold transition-opacity hover:opacity-90"
+              style={{ background: "var(--primary)", color: "var(--on-primary)" }}
             >
               Get directions
             </Link>

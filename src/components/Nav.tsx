@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const links = [
-  { href: "/", label: "Home" },
   { href: "/flavors", label: "Flavors" },
   { href: "/menu", label: "Menu" },
   { href: "/about", label: "Our Story" },
@@ -17,34 +16,37 @@ export default function Nav() {
 
   return (
     <header
-      className="sticky top-0 z-[200] w-full border-b"
-      style={{ background: "var(--background)", borderColor: "var(--border)" }}
+      className="sticky top-0 z-[200] w-full border-b bg-bg"
+      style={{ borderColor: "var(--border)" }}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 shrink-0"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
           <span
-            className="text-2xl"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--accent)" }}
+            className="text-[22px] font-bold tracking-tight"
+            style={{ color: "var(--primary)" }}
           >
-            M
+            Mariposa
           </span>
           <span
-            className="text-sm font-semibold tracking-wide uppercase"
-            style={{ color: "var(--foreground)", letterSpacing: "0.08em" }}
+            className="hidden sm:block text-xs font-medium tracking-widest uppercase"
+            style={{ color: "var(--muted)", letterSpacing: "0.1em" }}
           >
-            Mariposa Ice Cream
+            Ice Cream
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               className="text-sm font-medium transition-colors"
               style={{
-                color:
-                  pathname === l.href ? "var(--accent)" : "var(--muted)",
+                color: pathname === l.href ? "var(--primary)" : "var(--muted)",
                 fontFamily: "var(--font-sans)",
               }}
             >
@@ -55,51 +57,42 @@ export default function Nav() {
 
         <a
           href="tel:6192845197"
-          className="hidden md:flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full transition-colors"
-          style={{
-            background: "var(--accent)",
-            color: "#fff",
-          }}
+          className="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded transition-opacity hover:opacity-85"
+          style={{ background: "var(--primary)", color: "var(--on-primary)" }}
         >
           619-284-5197
         </a>
 
         <button
-          className="md:hidden p-2"
+          className="md:hidden p-2 -mr-2"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
-          style={{ color: "var(--foreground)" }}
         >
-          <div className="w-5 flex flex-col gap-1.5">
-            <span
-              className="block h-0.5 transition-all"
-              style={{
-                background: "var(--foreground)",
-                transform: open ? "rotate(45deg) translate(4px,4px)" : "none",
-              }}
-            />
-            <span
-              className="block h-0.5 transition-all"
-              style={{
-                background: "var(--foreground)",
-                opacity: open ? 0 : 1,
-              }}
-            />
-            <span
-              className="block h-0.5 transition-all"
-              style={{
-                background: "var(--foreground)",
-                transform: open ? "rotate(-45deg) translate(4px,-4px)" : "none",
-              }}
-            />
+          <div className="w-5 flex flex-col gap-[5px]">
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="block h-px transition-all duration-200"
+                style={{
+                  background: "var(--ink)",
+                  opacity: open && i === 1 ? 0 : 1,
+                  transform:
+                    open && i === 0
+                      ? "rotate(45deg) translate(4px, 4px)"
+                      : open && i === 2
+                      ? "rotate(-45deg) translate(4px, -4px)"
+                      : "none",
+                }}
+              />
+            ))}
           </div>
         </button>
       </div>
 
       {open && (
         <div
-          className="md:hidden border-t px-6 py-4 flex flex-col gap-4"
-          style={{ background: "var(--background)", borderColor: "var(--border)" }}
+          className="md:hidden border-t px-6 py-5 flex flex-col gap-5 bg-bg"
+          style={{ borderColor: "var(--border)" }}
         >
           {links.map((l) => (
             <Link
@@ -107,9 +100,7 @@ export default function Nav() {
               href={l.href}
               onClick={() => setOpen(false)}
               className="text-base font-medium"
-              style={{
-                color: pathname === l.href ? "var(--accent)" : "var(--foreground)",
-              }}
+              style={{ color: pathname === l.href ? "var(--primary)" : "var(--ink)" }}
             >
               {l.label}
             </Link>

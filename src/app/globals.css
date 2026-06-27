@@ -1,25 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --surface: oklch(0.97 0 0);
-  --muted: oklch(0.55 0 0);
-  --accent: oklch(0.5 0.2 250);
-  --border: oklch(0.9 0 0);
+  --background: #FAF8F4;
+  --foreground: #2C1810;
+  --surface: #F5E6D3;
+  --muted: #6B4F3A;
+  --accent: #D4634A;
+  --accent-hover: #BC4F38;
+  --border: #E8D8C4;
 
-  /* Easing curves (emil-design-eng) */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
-  /* Z-index scale */
   --z-dropdown: 100;
   --z-sticky: 200;
   --z-modal-backdrop: 300;
   --z-modal: 400;
   --z-toast: 500;
-  --z-tooltip: 600;
 }
 
 @theme inline {
@@ -28,9 +26,11 @@
   --color-surface: var(--surface);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   --color-border: var(--border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: "Cabinet Grotesk", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -41,10 +41,24 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabinet Grotesk", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }

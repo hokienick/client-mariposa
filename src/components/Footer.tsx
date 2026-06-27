@@ -2,13 +2,13 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--primary)" }}>
+    <footer style={{ background: "var(--accent)" }}>
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b" style={{ borderColor: "oklch(0.38 0.09 290)" }}>
           <div>
             <p
               className="text-2xl font-bold mb-3"
-              style={{ fontFamily: "var(--font-display)", color: "var(--on-primary)" }}
+              style={{ fontFamily: "var(--font-display)", color: "var(--on-accent)" }}
             >
               Mariposa
             </p>
@@ -36,7 +36,7 @@ export default function Footer() {
               <a
                 href="tel:6192845197"
                 className="block mt-3 font-semibold transition-opacity hover:opacity-80"
-                style={{ color: "var(--accent)" }}
+                style={{ color: "var(--primary)" }}
               >
                 619-284-5197
               </a>

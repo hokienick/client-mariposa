@@ -2,15 +2,15 @@
 
 :root {
   /* ── Palette (OKLCH) ────────────────────────────────── */
-  --bg:       oklch(1.000 0.000 0);          /* pure white */
-  --surface:  oklch(0.965 0.004 290);        /* near-white, faint violet */
-  --ink:      oklch(0.155 0.025 290);        /* near-black, violet-tinted */
-  --muted:    oklch(0.480 0.030 290);        /* mid violet-gray ≥4.5:1 on white */
-  --primary:  oklch(0.295 0.115 290);        /* deep blackberry/eggplant */
-  --accent:   oklch(0.720 0.130 55);         /* warm amber/honey */
-  --on-primary: oklch(1.000 0.000 0);        /* white on primary fills */
-  --on-accent: oklch(0.155 0.025 290);       /* dark ink on accent fills */
-  --border:   oklch(0.890 0.008 290);        /* subtle violet-tinted rule */
+  --bg:       oklch(0.975 0.010 40);         /* warm peach-tinted white — ice cream shop warmth */
+  --surface:  oklch(0.955 0.016 40);         /* slightly deeper warm for section contrast */
+  --ink:      oklch(0.12 0.015 50);          /* near-black, warm-tinted */
+  --muted:    oklch(0.48 0.022 50);          /* warm gray ≥4.5:1 on bg */
+  --primary:  oklch(0.680 0.145 45);         /* warm amber/honey — brand hero color */
+  --accent:   oklch(0.295 0.115 290);        /* deep eggplant — footer + dark moments only */
+  --on-primary: oklch(0.10 0.010 50);        /* dark ink on amber */
+  --on-accent: oklch(0.97 0.008 290);        /* light text on eggplant */
+  --border:   oklch(0.90 0.014 40);          /* warm light border */
 
   /* ── Easing ─────────────────────────────────────────── */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
@@ -37,6 +37,11 @@
   --color-border:     var(--border);
   --font-display: "Bitter", Georgia, serif;
   --font-sans:    "Barlow", system-ui, sans-serif;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-25%); }
 }
 
 @media (prefers-reduced-motion: reduce) {

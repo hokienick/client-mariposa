@@ -56,86 +56,140 @@ export default function FlavorsPage() {
   const filtered = flavors.filter((f) => active === "All" || f.cats.includes(active));
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
+    <div>
       {/* Header */}
-      <div className="mb-14">
-        <h1 className="text-[clamp(2.5rem,6vw,5rem)] leading-none mb-4" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em" }}>
-          Our Flavors
-        </h1>
-        <p className="text-base" style={{ color: "var(--muted)" }}>
-          48 flavors. All made here. Rotation changes daily — call ahead if a specific flavor matters.
-        </p>
-      </div>
-
-      {/* Filter */}
-      <div className="flex flex-wrap gap-2 mb-10">
-        {cats.map((c) => (
-          <button
-            key={c}
-            onClick={() => setActive(c)}
-            className="px-4 py-1.5 rounded text-sm font-medium transition-all"
-            style={{
-              background: active === c ? "var(--primary)" : "transparent",
-              color: active === c ? "var(--on-primary)" : "var(--muted)",
-              border: `1px solid ${active === c ? "var(--primary)" : "var(--border)"}`,
-            }}
-          >
-            {c}
-          </button>
-        ))}
-      </div>
-
-      {/* List */}
-      <div className="mb-16">
-        <AnimatePresence mode="popLayout">
-          {filtered.map((f) => (
-            <motion.div
-              key={f.name}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center justify-between py-3.5 border-b"
-              style={{ borderColor: "var(--border)" }}
+      <section className="max-w-5xl mx-auto px-6 pt-16 pb-10">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <h1
+              className="text-[clamp(3rem,8vw,7rem)] leading-[0.92] mb-4"
+              style={{
+                fontFamily: "var(--font-display)",
+                letterSpacing: "-0.04em",
+              }}
             >
-              <span className="text-base font-medium">{f.name}</span>
-              <div className="flex items-center gap-2">
-                {f.note && (
-                  <span className="text-xs" style={{ color: "var(--muted)" }}>{f.note}</span>
-                )}
-                {f.cats.includes("Vegan & Sorbet") && (
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded"
-                    style={{ background: "oklch(0.88 0.06 155)", color: "oklch(0.28 0.10 155)" }}
-                  >
-                    Vegan
-                  </span>
-                )}
-                {f.cats.includes("Seasonal") && (
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded"
-                    style={{ background: "oklch(0.93 0.05 55)", color: "oklch(0.42 0.11 55)" }}
-                  >
-                    Seasonal
+              Our<br />Flavors.
+            </h1>
+            <p className="text-base" style={{ color: "var(--muted)" }}>
+              All made here on Adams Avenue. The rotation changes daily.
+            </p>
+          </div>
+          <div className="shrink-0 text-right md:pb-2">
+            <span
+              className="block leading-none font-bold tabular-nums"
+              style={{
+                fontSize: "clamp(5rem,13vw,10rem)",
+                color: "var(--primary)",
+                fontFamily: "var(--font-display)",
+                letterSpacing: "-0.06em",
+                lineHeight: 1,
+              }}
+            >
+              48
+            </span>
+            <span
+              className="text-xs font-bold uppercase tracking-[0.14em]"
+              style={{ color: "var(--muted)" }}
+            >
+              flavors total
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Filter + List */}
+      <div className="max-w-5xl mx-auto px-6 pb-16">
+        {/* Filter tabs */}
+        <div className="flex flex-wrap gap-2 mb-10">
+          {cats.map((c) => (
+            <button
+              key={c}
+              onClick={() => setActive(c)}
+              className="px-5 py-2 text-sm font-semibold transition-all"
+              style={{
+                background: active === c ? "var(--primary)" : "transparent",
+                color: active === c ? "var(--on-primary)" : "var(--ink)",
+                border: `1.5px solid ${active === c ? "var(--primary)" : "var(--border)"}`,
+                borderRadius: "9999px",
+              }}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+
+        {/* Flavor list */}
+        <div className="mb-16">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((f) => (
+              <motion.div
+                key={f.name}
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                className="flex items-center justify-between py-4 border-b"
+                style={{ borderColor: "var(--border)" }}
+              >
+                <span className="text-lg font-medium">{f.name}</span>
+                <div className="flex items-center gap-2 shrink-0">
+                  {f.note && (
+                    <span className="text-xs hidden sm:block" style={{ color: "var(--muted)" }}>
+                      {f.note}
+                    </span>
+                  )}
+                  {f.cats.includes("Vegan & Sorbet") && (
+                    <span
+                      className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5"
+                      style={{
+                        background: "oklch(0.88 0.06 155)",
+                        color: "oklch(0.28 0.10 155)",
+                        borderRadius: "9999px",
+                      }}
+                    >
+                      Vegan
+                    </span>
+                  )}
+                  {f.cats.includes("Seasonal") && (
+                    <span
+                      className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5"
+                      style={{
+                        background: "oklch(0.93 0.05 55)",
+                        color: "oklch(0.42 0.11 55)",
+                        borderRadius: "9999px",
+                      }}
+                    >
+                      Seasonal
+                    </span>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Toppings */}
+        <div className="px-8 py-10" style={{ background: "var(--surface)" }}>
+          <h2 className="text-3xl mb-8" style={{ fontFamily: "var(--font-display)" }}>
+            Sundae Toppings
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12">
+            {toppings.map((t) => (
+              <div
+                key={t.name}
+                className="flex items-center justify-between py-3 border-b"
+                style={{ borderColor: "var(--border)" }}
+              >
+                <span className="text-base font-medium">{t.name}</span>
+                {t.note && (
+                  <span className="text-xs" style={{ color: "var(--muted)" }}>
+                    {t.note}
                   </span>
                 )}
               </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
-
-      {/* Toppings */}
-      <div className="border-t pt-12" style={{ borderColor: "var(--border)" }}>
-        <h2 className="text-2xl mb-8" style={{ fontFamily: "var(--font-display)" }}>Sundae Toppings</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12">
-          {toppings.map((t) => (
-            <div key={t.name} className="flex items-center justify-between py-3 border-b" style={{ borderColor: "var(--border)" }}>
-              <span className="text-base font-medium">{t.name}</span>
-              {t.note && <span className="text-xs" style={{ color: "var(--muted)" }}>{t.note}</span>}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

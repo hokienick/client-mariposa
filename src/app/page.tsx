@@ -173,11 +173,11 @@ export default function Home() {
       {/* ── Marquee ── */}
       <div
         className="overflow-hidden py-3.5"
-        style={{ background: "var(--accent)" }}
+        style={{ background: "var(--secondary)" }}
       >
         <div
           className="flex whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.18em]"
-          style={{ color: "var(--on-accent)", animation: "marquee 30s linear infinite" }}
+          style={{ color: "var(--on-secondary)", animation: "marquee 30s linear infinite" }}
         >
           {Array.from({ length: 4 }).map((_, i) => (
             <span key={i} className="pr-8">

@@ -7,9 +7,11 @@
   --ink:         oklch(0.145 0.020 55);   /* warm chocolate brown-black */
   --muted:       oklch(0.480 0.025 55);   /* warm mid-brown ≥4.5:1 on bg */
   --dark:        oklch(0.235 0.045 55);   /* deep walnut — footer, nav, dark moments */
-  --accent:      oklch(0.620 0.195 25);   /* cherry red / strawberry — the 60s pop */
+  --accent:      oklch(0.580 0.130 42);   /* terracotta orange — the mural wall */
+  --secondary:   oklch(0.680 0.095 220);  /* sky/powder blue — the logo splat */
   --on-dark:     oklch(0.970 0.008 85);   /* warm white on walnut */
-  --on-accent:   oklch(1.000 0.000 0);    /* white on cherry red */
+  --on-accent:   oklch(1.000 0.000 0);    /* white on terracotta */
+  --on-secondary: oklch(1.000 0.000 0);   /* white on sky blue */
   --border:      oklch(0.910 0.016 85);   /* warm light border */
 
   /* ── Semantic aliases (used in components) ─────────── */
@@ -36,12 +38,14 @@
   --color-ink:        var(--ink);
   --color-muted:      var(--muted);
   --color-dark:       var(--dark);
-  --color-accent:     var(--accent);
-  --color-primary:    var(--primary);
-  --color-on-dark:    var(--on-dark);
-  --color-on-accent:  var(--on-accent);
-  --color-on-primary: var(--on-primary);
-  --color-border:     var(--border);
+  --color-accent:      var(--accent);
+  --color-secondary:   var(--secondary);
+  --color-primary:     var(--primary);
+  --color-on-dark:     var(--on-dark);
+  --color-on-accent:   var(--on-accent);
+  --color-on-secondary: var(--on-secondary);
+  --color-on-primary:  var(--on-primary);
+  --color-border:      var(--border);
   --font-display: "Hoover", Georgia, serif;
   --font-sans:    "General Sans", system-ui, sans-serif;
   --font-accent:  "Chubbo", system-ui, sans-serif;

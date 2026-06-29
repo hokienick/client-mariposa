@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 
 type Cat = "All" | "In the Case" | "Vegan & Sorbet" | "Seasonal" | "Rotating";
@@ -57,16 +58,13 @@ export default function FlavorsPage() {
 
   return (
     <div>
-      {/* Header */}
+      {/* ── Header ── */}
       <section className="max-w-5xl mx-auto px-6 pt-16 pb-10">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <h1
               className="text-[clamp(3rem,8vw,7rem)] leading-[0.92] mb-4"
-              style={{
-                fontFamily: "var(--font-display)",
-                letterSpacing: "-0.04em",
-              }}
+              style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.04em" }}
             >
               Our<br />Flavors.
             </h1>
@@ -76,13 +74,12 @@ export default function FlavorsPage() {
           </div>
           <div className="shrink-0 text-right md:pb-2">
             <span
-              className="block leading-none font-bold tabular-nums"
+              className="block font-bold tabular-nums leading-none"
               style={{
                 fontSize: "clamp(5rem,13vw,10rem)",
-                color: "var(--primary)",
+                color: "var(--accent)",
                 fontFamily: "var(--font-display)",
                 letterSpacing: "-0.06em",
-                lineHeight: 1,
               }}
             >
               48
@@ -97,7 +94,26 @@ export default function FlavorsPage() {
         </div>
       </section>
 
-      {/* Filter + List */}
+      {/* ── Hero image strip ── */}
+      <div className="grid grid-cols-3 gap-1 mb-12 max-h-52 overflow-hidden">
+        {[
+          { src: "/images/cone-mar2026.jpg", alt: "Waffle cone with a generous scoop" },
+          { src: "/images/blueberry-bowl.jpg", alt: "Blueberry ice cream with fresh blueberries" },
+          { src: "/images/lemon-sorbet.jpg", alt: "Lemon sorbet" },
+        ].map((img) => (
+          <div key={img.src} className="relative h-52 overflow-hidden">
+            <Image
+              src={img.src}
+              alt={img.alt}
+              fill
+              className="object-cover"
+              sizes="33vw"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* ── Filter + List ── */}
       <div className="max-w-5xl mx-auto px-6 pb-16">
         {/* Filter tabs */}
         <div className="flex flex-wrap gap-2 mb-10">
@@ -107,10 +123,11 @@ export default function FlavorsPage() {
               onClick={() => setActive(c)}
               className="px-5 py-2 text-sm font-semibold transition-all"
               style={{
-                background: active === c ? "var(--primary)" : "transparent",
-                color: active === c ? "var(--on-primary)" : "var(--ink)",
-                border: `1.5px solid ${active === c ? "var(--primary)" : "var(--border)"}`,
+                background: active === c ? "var(--accent)" : "transparent",
+                color: active === c ? "var(--on-accent)" : "var(--ink)",
+                border: `1.5px solid ${active === c ? "var(--accent)" : "var(--border)"}`,
                 borderRadius: "9999px",
+                fontFamily: "var(--font-sans)",
               }}
             >
               {c}
@@ -132,10 +149,18 @@ export default function FlavorsPage() {
                 className="flex items-center justify-between py-4 border-b"
                 style={{ borderColor: "var(--border)" }}
               >
-                <span className="text-lg font-medium">{f.name}</span>
+                <span
+                  className="text-lg font-bold"
+                  style={{ fontFamily: "var(--font-accent)", color: "var(--ink)" }}
+                >
+                  {f.name}
+                </span>
                 <div className="flex items-center gap-2 shrink-0">
                   {f.note && (
-                    <span className="text-xs hidden sm:block" style={{ color: "var(--muted)" }}>
+                    <span
+                      className="text-xs hidden sm:block"
+                      style={{ color: "var(--muted)", fontFamily: "var(--font-sans)" }}
+                    >
                       {f.note}
                     </span>
                   )}
@@ -171,7 +196,10 @@ export default function FlavorsPage() {
 
         {/* Toppings */}
         <div className="px-8 py-10" style={{ background: "var(--surface)" }}>
-          <h2 className="text-3xl mb-8" style={{ fontFamily: "var(--font-display)" }}>
+          <h2
+            className="text-3xl mb-8"
+            style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
+          >
             Sundae Toppings
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12">
@@ -181,7 +209,12 @@ export default function FlavorsPage() {
                 className="flex items-center justify-between py-3 border-b"
                 style={{ borderColor: "var(--border)" }}
               >
-                <span className="text-base font-medium">{t.name}</span>
+                <span
+                  className="text-base font-bold"
+                  style={{ fontFamily: "var(--font-accent)", color: "var(--ink)" }}
+                >
+                  {t.name}
+                </span>
                 {t.note && (
                   <span className="text-xs" style={{ color: "var(--muted)" }}>
                     {t.note}

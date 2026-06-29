@@ -54,18 +54,18 @@ const sections: Section[] = [
 export default function MenuPage() {
   return (
     <div>
-      {/* Hero image — tall, cinematic */}
+      {/* ── Hero image — sundae from Instagram ── */}
       <div className="relative overflow-hidden" style={{ minHeight: "62vh" }}>
         <Image
-          src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1600&q=85"
-          alt="A layered chocolate ice cream sundae with hot fudge"
+          src="/images/sundae.jpg"
+          alt="A Mariposa sundae with homemade hot fudge"
           fill
           className="object-cover object-center"
           priority
         />
         <div
           className="absolute inset-0"
-          style={{ background: "oklch(0.10 0.04 290 / 0.55)" }}
+          style={{ background: "oklch(0.10 0.02 55 / 0.48)" }}
         />
         <div className="absolute inset-0 flex flex-col justify-end px-8 md:px-14 pb-12">
           <h1
@@ -78,13 +78,16 @@ export default function MenuPage() {
           >
             The Menu
           </h1>
-          <p className="text-base mt-4 max-w-md" style={{ color: "oklch(0.82 0.04 290)" }}>
+          <p
+            className="text-base mt-4 max-w-md wide"
+            style={{ color: "oklch(0.88 0.010 55)" }}
+          >
             Handmade ice cream, sundaes, shakes, and more. All made in-house on Adams Avenue.
           </p>
         </div>
       </div>
 
-      {/* Pricing */}
+      {/* ── Pricing ── */}
       <div className="max-w-5xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16 mb-16">
           {sections.map((s) => (
@@ -97,7 +100,10 @@ export default function MenuPage() {
                   {s.title}
                 </h2>
                 {s.desc && (
-                  <span className="text-xs font-medium" style={{ color: "var(--muted)" }}>
+                  <span
+                    className="text-xs font-medium"
+                    style={{ color: "var(--muted)" }}
+                  >
                     {s.desc}
                   </span>
                 )}
@@ -108,10 +114,15 @@ export default function MenuPage() {
                   className="flex items-center justify-between py-3.5 border-b"
                   style={{ borderColor: "var(--border)" }}
                 >
-                  <span className="text-base">{r.name}</span>
+                  <span
+                    className="text-base font-bold"
+                    style={{ fontFamily: "var(--font-accent)", color: "var(--ink)" }}
+                  >
+                    {r.name}
+                  </span>
                   <span
                     className="text-base font-bold tabular-nums"
-                    style={{ color: "var(--primary)" }}
+                    style={{ color: "var(--accent)", fontFamily: "var(--font-sans)" }}
                   >
                     {r.price}
                   </span>
@@ -121,7 +132,7 @@ export default function MenuPage() {
           ))}
         </div>
 
-        {/* Special orders */}
+        {/* ── Special orders ── */}
         <div
           className="px-8 md:px-12 py-12"
           style={{ background: "var(--surface)" }}
@@ -145,7 +156,11 @@ export default function MenuPage() {
                 desc: "Approximately 65 scoops. Perfect for events. Requires 1 week advance notice.",
               },
             ].map((s) => (
-              <div key={s.name} className="border-b pb-8" style={{ borderColor: "var(--border)" }}>
+              <div
+                key={s.name}
+                className="border-b pb-8"
+                style={{ borderColor: "var(--border)" }}
+              >
                 <div className="flex items-baseline justify-between mb-3">
                   <h3
                     className="text-xl font-bold"
@@ -155,12 +170,15 @@ export default function MenuPage() {
                   </h3>
                   <span
                     className="text-2xl font-bold"
-                    style={{ color: "var(--primary)", fontFamily: "var(--font-display)" }}
+                    style={{ color: "var(--accent)", fontFamily: "var(--font-display)" }}
                   >
                     {s.price}
                   </span>
                 </div>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                <p
+                  className="text-sm leading-relaxed wide"
+                  style={{ color: "var(--muted)" }}
+                >
                   {s.desc}
                 </p>
               </div>
@@ -171,14 +189,18 @@ export default function MenuPage() {
             <a
               href="tel:6192845197"
               className="px-6 py-3 text-sm font-bold transition-opacity hover:opacity-90"
-              style={{ background: "var(--primary)", color: "var(--on-primary)" }}
+              style={{
+                background: "var(--accent)",
+                color: "var(--on-accent)",
+                fontFamily: "var(--font-sans)",
+              }}
             >
               Call 619-284-5197
             </a>
             <Link
               href="/flavors"
               className="text-sm font-medium transition-opacity hover:opacity-70"
-              style={{ color: "var(--muted)" }}
+              style={{ color: "var(--muted)", fontFamily: "var(--font-sans)" }}
             >
               See today's flavors &rarr;
             </Link>

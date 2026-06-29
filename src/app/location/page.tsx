@@ -1,3 +1,5 @@
+"use client";
+
 const hours = [
   { day: "Monday",    time: "Closed", closed: true },
   { day: "Tuesday",   time: "Closed", closed: true },
@@ -16,14 +18,11 @@ export default function LocationPage() {
 
   return (
     <div>
-      {/* Header */}
+      {/* ── Header ── */}
       <section className="max-w-5xl mx-auto px-6 pt-16 pb-10">
         <h1
           className="text-[clamp(3rem,7vw,6.5rem)] leading-[0.92] mb-8"
-          style={{
-            fontFamily: "var(--font-display)",
-            letterSpacing: "-0.04em",
-          }}
+          style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.04em" }}
         >
           Come find<br />us.
         </h1>
@@ -35,7 +34,10 @@ export default function LocationPage() {
             >
               Address
             </p>
-            <address className="not-italic text-xl leading-relaxed font-semibold">
+            <address
+              className="not-italic text-xl leading-relaxed font-semibold"
+              style={{ color: "var(--ink)" }}
+            >
               3450 Adams Avenue<br />
               Normal Heights<br />
               San Diego, CA 92116
@@ -48,10 +50,13 @@ export default function LocationPage() {
             >
               Open
             </p>
-            <div className="text-xl font-semibold leading-relaxed">
+            <div className="text-xl font-semibold leading-relaxed" style={{ color: "var(--ink)" }}>
               <p>Thu – Sat &nbsp;1pm – 9pm</p>
               <p>Sun &nbsp;2pm – 8pm</p>
-              <p className="text-base font-normal mt-1" style={{ color: "var(--muted)" }}>
+              <p
+                className="text-base font-normal mt-1"
+                style={{ color: "var(--muted)" }}
+              >
                 Mon – Wed closed
               </p>
             </div>
@@ -59,12 +64,15 @@ export default function LocationPage() {
         </div>
       </section>
 
-      {/* Hours + call detail */}
+      {/* ── Hours + contact ── */}
       <div className="max-w-5xl mx-auto px-6 py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12 mb-14">
           {/* Hours table */}
           <div>
-            <h2 className="text-2xl mb-6" style={{ fontFamily: "var(--font-display)" }}>
+            <h2
+              className="text-2xl mb-6"
+              style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
+            >
               Weekly hours
             </h2>
             {hours.map((h) => {
@@ -76,9 +84,9 @@ export default function LocationPage() {
                   style={{ borderColor: "var(--border)" }}
                 >
                   <span
-                    className="text-base font-medium"
+                    className="text-base"
                     style={{
-                      color: isToday ? "var(--primary)" : "var(--ink)",
+                      color: isToday ? "var(--accent)" : "var(--ink)",
                       fontWeight: isToday ? 700 : 500,
                     }}
                   >
@@ -87,8 +95,8 @@ export default function LocationPage() {
                       <span
                         className="ml-2 text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5"
                         style={{
-                          background: "oklch(0.93 0.05 45)",
-                          color: "var(--primary)",
+                          background: "oklch(0.93 0.05 25)",
+                          color: "var(--accent)",
                           borderRadius: "3px",
                         }}
                       >
@@ -102,7 +110,7 @@ export default function LocationPage() {
                       color: h.closed
                         ? "var(--muted)"
                         : isToday
-                        ? "var(--primary)"
+                        ? "var(--accent)"
                         : "var(--ink)",
                       fontWeight: isToday ? 600 : 400,
                     }}
@@ -112,7 +120,10 @@ export default function LocationPage() {
                 </div>
               );
             })}
-            <p className="text-xs mt-5 leading-relaxed" style={{ color: "var(--muted)" }}>
+            <p
+              className="text-xs mt-5 leading-relaxed wide"
+              style={{ color: "var(--muted)" }}
+            >
               Hours may vary on holidays. We post changes on the answering machine.
             </p>
           </div>
@@ -130,14 +141,17 @@ export default function LocationPage() {
                 href="tel:6192845197"
                 className="block font-bold leading-none mb-2 transition-opacity hover:opacity-80"
                 style={{
-                  color: "var(--primary)",
+                  color: "var(--accent)",
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(1.75rem,3.5vw,2.5rem)",
                 }}
               >
                 619-284-5197
               </a>
-              <p className="text-sm" style={{ color: "var(--muted)" }}>
+              <p
+                className="text-sm wide"
+                style={{ color: "var(--muted)" }}
+              >
                 We post hour changes on the answering machine when they come up.
               </p>
             </div>
@@ -147,7 +161,11 @@ export default function LocationPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-bold border px-5 py-3 transition-colors hover:border-ink self-start"
-              style={{ borderColor: "var(--border)", color: "var(--ink)" }}
+              style={{
+                borderColor: "var(--border)",
+                color: "var(--ink)",
+                fontFamily: "var(--font-sans)",
+              }}
             >
               Open in Google Maps &rarr;
             </a>
@@ -155,7 +173,10 @@ export default function LocationPage() {
         </div>
 
         {/* Map */}
-        <div className="overflow-hidden border" style={{ borderColor: "var(--border)" }}>
+        <div
+          className="overflow-hidden border"
+          style={{ borderColor: "var(--border)" }}
+        >
           <iframe
             title="Mariposa Ice Cream on Adams Avenue"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.3!2d-117.1282!3d32.7612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d9558e73a5e3b5%3A0x1!2s3450+Adams+Ave%2C+San+Diego%2C+CA+92116!5e0!3m2!1sen!2sus!4v1"

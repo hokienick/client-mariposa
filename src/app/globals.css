@@ -2,27 +2,32 @@
 
 :root {
   /* ── Palette (OKLCH) ────────────────────────────────── */
-  --bg:       oklch(0.975 0.010 40);         /* warm peach-tinted white — ice cream shop warmth */
-  --surface:  oklch(0.955 0.016 40);         /* slightly deeper warm for section contrast */
-  --ink:      oklch(0.12 0.015 50);          /* near-black, warm-tinted */
-  --muted:    oklch(0.48 0.022 50);          /* warm gray ≥4.5:1 on bg */
-  --primary:  oklch(0.680 0.145 45);         /* warm amber/honey — brand hero color */
-  --accent:   oklch(0.295 0.115 290);        /* deep eggplant — footer + dark moments only */
-  --on-primary: oklch(0.10 0.010 50);        /* dark ink on amber */
-  --on-accent: oklch(0.97 0.008 290);        /* light text on eggplant */
-  --border:   oklch(0.90 0.014 40);          /* warm light border */
+  --bg:          oklch(0.985 0.008 85);   /* warm near-white — soda fountain counter */
+  --surface:     oklch(0.965 0.012 85);   /* slightly deeper warm for section contrast */
+  --ink:         oklch(0.145 0.020 55);   /* warm chocolate brown-black */
+  --muted:       oklch(0.480 0.025 55);   /* warm mid-brown ≥4.5:1 on bg */
+  --dark:        oklch(0.235 0.045 55);   /* deep walnut — footer, nav, dark moments */
+  --accent:      oklch(0.620 0.195 25);   /* cherry red / strawberry — the 60s pop */
+  --on-dark:     oklch(0.970 0.008 85);   /* warm white on walnut */
+  --on-accent:   oklch(1.000 0.000 0);    /* white on cherry red */
+  --border:      oklch(0.910 0.016 85);   /* warm light border */
+
+  /* ── Semantic aliases (used in components) ─────────── */
+  --primary:     var(--accent);
+  --on-primary:  var(--on-accent);
 
   /* ── Easing ─────────────────────────────────────────── */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out:    cubic-bezier(0.77, 0, 0.175, 1);
 
   /* ── Z-index scale ───────────────────────────────────── */
-  --z-dropdown: 100;
-  --z-sticky:   200;
+  --z-dropdown:       100;
+  --z-sticky:         200;
   --z-modal-backdrop: 300;
-  --z-modal:    400;
-  --z-toast:    500;
-  --z-tooltip:  600;
+  --z-modal:          400;
+  --z-toast:          500;
+  --z-tooltip:        600;
 }
 
 @theme inline {
@@ -30,13 +35,16 @@
   --color-surface:    var(--surface);
   --color-ink:        var(--ink);
   --color-muted:      var(--muted);
-  --color-primary:    var(--primary);
+  --color-dark:       var(--dark);
   --color-accent:     var(--accent);
-  --color-on-primary: var(--on-primary);
+  --color-primary:    var(--primary);
+  --color-on-dark:    var(--on-dark);
   --color-on-accent:  var(--on-accent);
+  --color-on-primary: var(--on-primary);
   --color-border:     var(--border);
-  --font-display: "Bitter", Georgia, serif;
-  --font-sans:    "Barlow", system-ui, sans-serif;
+  --font-display: "Hoover", Georgia, serif;
+  --font-sans:    "General Sans", system-ui, sans-serif;
+  --font-accent:  "Chubbo", system-ui, sans-serif;
 }
 
 @keyframes marquee {
@@ -58,7 +66,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: "Barlow", system-ui, sans-serif;
+  font-family: "General Sans", system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
@@ -66,7 +74,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: "Bitter", Georgia, serif;
+  font-family: "Hoover", Georgia, serif;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.025em;

@@ -16,38 +16,41 @@ export default function Nav() {
 
   return (
     <header
-      className="sticky top-0 z-[200] w-full border-b bg-bg"
-      style={{ borderColor: "var(--border)" }}
+      className="sticky top-0 w-full border-b bg-bg"
+      style={{ borderColor: "var(--border)", zIndex: "var(--z-sticky)" }}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-8">
+        {/* Wordmark */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 shrink-0"
+          className="shrink-0 leading-none"
           style={{ fontFamily: "var(--font-display)" }}
         >
           <span
-            className="text-[22px] font-bold tracking-tight"
-            style={{ color: "var(--primary)" }}
+            className="text-[21px] font-bold tracking-tight"
+            style={{ color: "var(--ink)" }}
           >
             Mariposa
           </span>
           <span
-            className="hidden sm:block text-xs font-medium tracking-widest uppercase"
-            style={{ color: "var(--muted)", letterSpacing: "0.1em" }}
+            className="hidden sm:inline ml-2 text-[12px] font-medium tracking-[0.08em] uppercase"
+            style={{ color: "var(--muted)" }}
           >
             Ice Cream
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-7">
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-7" aria-label="Main navigation">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm font-medium transition-colors"
+              className="text-[13px] font-medium transition-colors"
               style={{
-                color: pathname === l.href ? "var(--primary)" : "var(--muted)",
+                color: pathname === l.href ? "var(--ink)" : "var(--muted)",
                 fontFamily: "var(--font-sans)",
+                fontWeight: pathname === l.href ? "600" : "500",
               }}
             >
               {l.label}
@@ -55,18 +58,25 @@ export default function Nav() {
           ))}
         </nav>
 
+        {/* Phone CTA */}
         <a
           href="tel:6192845197"
-          className="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded transition-opacity hover:opacity-85"
-          style={{ background: "var(--primary)", color: "var(--on-primary)" }}
+          className="hidden md:inline-flex items-center gap-1.5 text-[13px] font-semibold px-4 py-2 transition-opacity hover:opacity-85"
+          style={{
+            background: "var(--accent)",
+            color: "var(--on-accent)",
+            fontFamily: "var(--font-sans)",
+          }}
         >
           619-284-5197
         </a>
 
+        {/* Hamburger */}
         <button
           className="md:hidden p-2 -mr-2"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
         >
           <div className="w-5 flex flex-col gap-[5px]">
             {[0, 1, 2].map((i) => (
@@ -89,9 +99,10 @@ export default function Nav() {
         </button>
       </div>
 
+      {/* Mobile drawer */}
       {open && (
         <div
-          className="md:hidden border-t px-6 py-5 flex flex-col gap-5 bg-bg"
+          className="md:hidden border-t px-6 py-6 flex flex-col gap-5 bg-bg"
           style={{ borderColor: "var(--border)" }}
         >
           {links.map((l) => (
@@ -100,7 +111,10 @@ export default function Nav() {
               href={l.href}
               onClick={() => setOpen(false)}
               className="text-base font-medium"
-              style={{ color: pathname === l.href ? "var(--primary)" : "var(--ink)" }}
+              style={{
+                color: pathname === l.href ? "var(--ink)" : "var(--muted)",
+                fontWeight: pathname === l.href ? "600" : "500",
+              }}
             >
               {l.label}
             </Link>

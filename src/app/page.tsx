@@ -34,140 +34,125 @@ export default function Home() {
   return (
     <div>
 
-      {/* ── HERO — type-as-visual, ice cream floating center ── */}
+      {/* ── HERO — logo as hero, viewport-contained, marquee above fold ── */}
       <section
-        className="relative overflow-x-hidden flex flex-col items-center"
-        style={{ minHeight: "calc(100vh - 64px)", background: "var(--bg)" }}
+        className="flex flex-col overflow-hidden"
+        style={{ height: "calc(100vh - 108px)", background: "var(--bg)" }}
       >
-        {/* Top label */}
-        <motion.p
+        {/* Top label row */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-10 text-[11px] font-bold uppercase tracking-[0.22em] text-center"
-          style={{ color: "var(--muted)" }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-between items-center px-6 pt-6 shrink-0"
         >
-          Normal Heights · San Diego · Est. 2000
-        </motion.p>
+          <span className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--muted)" }}>
+            Normal Heights · San Diego
+          </span>
+          <span className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--accent)" }}>
+            Est. 2000
+          </span>
+        </motion.div>
 
-        {/* Type + photo sandwich — photo floats between MARIPOSA and ICE CREAM */}
-        <div className="relative w-full flex flex-col items-center" style={{ marginTop: "2vw" }}>
+        {/* Center — mural logo + type + CTAs */}
+        <div className="flex-1 flex flex-col items-center justify-center gap-4 px-6 py-2 min-h-0">
 
-          {/* MARIPOSA — z-0, behind the photo */}
-          <motion.h1
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-0 w-full text-center"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(4.5rem, 19.5vw, 19.5rem)",
-              letterSpacing: "-0.045em",
-              lineHeight: 0.88,
-              textTransform: "uppercase",
-              color: "var(--ink)",
-              whiteSpace: "nowrap",
-            }}
-          >
-            MARIPOSA
-          </motion.h1>
-
-          {/* Cone photo — z-10, negative margins so it bites into both text lines */}
+          {/* Mural logo — the brand identity in paint */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.88 }}
+            initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.95, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 overflow-hidden"
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="relative overflow-hidden shrink-0"
             style={{
-              width: "clamp(160px, 26vw, 380px)",
-              aspectRatio: "3/4",
-              marginTop: "clamp(-1.5rem, -4.5vw, -4.5rem)",
-              marginBottom: "clamp(-1.5rem, -4.5vw, -4.5rem)",
-              boxShadow: "0 40px 100px oklch(0.10 0.02 55 / 0.22)",
+              height: "clamp(200px, 44vh, 400px)",
+              aspectRatio: "83/100",
+              boxShadow: "0 20px 60px oklch(0.10 0.02 55 / 0.14)",
             }}
           >
             <Image
-              src="/images/cone-mar2026.jpg"
-              alt="A waffle cone from Mariposa Ice Cream"
+              src="/images/logo-orangeblue.jpg"
+              alt="Mariposa Ice Cream mural — 3450 Adams Avenue"
               fill
               className="object-cover object-center"
               priority
-              sizes="26vw"
+              sizes="(max-width: 768px) 80vw, 44vh"
             />
           </motion.div>
 
-          {/* ICE CREAM — z-0, behind the photo */}
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
+          {/* Brand name */}
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-0 w-full text-center"
+            transition={{ duration: 0.65, delay: 0.18, ease: [0.25, 1, 0.5, 1] }}
+            className="text-center shrink-0"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(3.5rem, 14.5vw, 14.5rem)",
-              letterSpacing: "-0.045em",
-              lineHeight: 0.88,
-              textTransform: "uppercase",
+              fontSize: "clamp(1.6rem, 3.2vw, 3.5rem)",
+              letterSpacing: "-0.04em",
+              lineHeight: 1.0,
               color: "var(--ink)",
-              whiteSpace: "nowrap",
             }}
           >
-            ICE CREAM
+            MARIPOSA ICE CREAM
+          </motion.h1>
+
+          {/* Tagline */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.28 }}
+            className="text-sm text-center shrink-0"
+            style={{ color: "var(--muted)", maxWidth: "36ch" }}
+          >
+            Homemade ice cream on Adams Avenue since 2000.
           </motion.p>
 
-        </div>
-
-        {/* Subline + CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.3 }}
-          className="flex flex-col items-center gap-5 mt-8 mb-12 px-6"
-        >
-          <p
-            className="text-base text-center"
-            style={{ color: "var(--muted)", maxWidth: "38ch" }}
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.34 }}
+            className="flex flex-wrap justify-center gap-3 shrink-0"
           >
-            No gimmicks. No mix-ins. Made and served by the same family for 26 years.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/flavors"
-              className="px-7 py-3.5 text-sm font-bold tracking-wider transition-opacity hover:opacity-85"
+              className="px-6 py-3 text-sm font-bold tracking-wider transition-opacity hover:opacity-85"
               style={{ background: "var(--accent)", color: "var(--on-accent)", fontFamily: "var(--font-sans)" }}
             >
               SEE TODAY'S FLAVORS
             </Link>
             <Link
               href="/location"
-              className="px-7 py-3.5 text-sm font-medium border transition-colors hover:border-ink"
+              className="px-6 py-3 text-sm font-medium border transition-colors"
               style={{ borderColor: "var(--border)", color: "var(--ink)", fontFamily: "var(--font-sans)" }}
             >
               Hours & Location
             </Link>
-          </div>
+          </motion.div>
 
-          {/* Press quotes — side by side */}
-          <div className="flex flex-wrap justify-center gap-x-10 gap-y-3 mt-3">
+          {/* Press */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.44 }}
+            className="flex flex-wrap justify-center gap-x-8 gap-y-2 shrink-0"
+          >
             {[
               { outlet: "New York Times", quote: "A must-visit when in San Diego." },
               { outlet: "San Diego Magazine", quote: "Best Ice Cream in San Diego." },
             ].map((p) => (
-              <div key={p.outlet} className="flex items-start gap-2.5">
-                <span
-                  className="text-[9px] font-bold uppercase tracking-[0.12em] shrink-0 mt-0.5"
-                  style={{ color: "var(--muted)" }}
-                >
+              <div key={p.outlet} className="flex items-start gap-2">
+                <span className="text-[9px] font-bold uppercase tracking-[0.12em] shrink-0 mt-0.5" style={{ color: "var(--muted)" }}>
                   {p.outlet}
                 </span>
-                <p className="text-xs font-semibold" style={{ color: "var(--ink)" }}>
-                  "{p.quote}"
-                </p>
+                <span className="text-xs font-semibold" style={{ color: "var(--ink)" }}>
+                  &ldquo;{p.quote}&rdquo;
+                </span>
               </div>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+
+        </div>
       </section>
 
       {/* ── Marquee ── */}

@@ -34,117 +34,146 @@ export default function Home() {
   return (
     <div>
 
-      {/* ── HERO — big type + full-bleed photo ── */}
+      {/* ── HERO — type-as-visual, ice cream floating center ── */}
       <section
-        className="grid grid-cols-1 md:grid-cols-[55fr_45fr] overflow-hidden"
+        className="relative overflow-x-hidden flex flex-col items-center"
         style={{ minHeight: "calc(100vh - 64px)", background: "var(--bg)" }}
       >
-        {/* Left: type stack — justified top-to-bottom */}
-        <div className="flex flex-col justify-between px-8 md:px-14 pt-10 pb-12 order-2 md:order-1">
+        {/* Top label */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mt-10 text-[11px] font-bold uppercase tracking-[0.22em] text-center"
+          style={{ color: "var(--muted)" }}
+        >
+          Normal Heights · San Diego · Est. 2000
+        </motion.p>
 
-          {/* Massive headline */}
+        {/* Type + photo sandwich — photo floats between MARIPOSA and ICE CREAM */}
+        <div className="relative w-full flex flex-col items-center" style={{ marginTop: "2vw" }}>
+
+          {/* MARIPOSA — z-0, behind the photo */}
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-0 w-full text-center"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(5rem, 11.5vw, 11rem)",
+              fontSize: "clamp(4.5rem, 19.5vw, 19.5rem)",
               letterSpacing: "-0.045em",
               lineHeight: 0.88,
-              color: "var(--ink)",
               textTransform: "uppercase",
+              color: "var(--ink)",
+              whiteSpace: "nowrap",
             }}
           >
-            MARI<br />POSA
+            MARIPOSA
           </motion.h1>
 
-          {/* Mid copy */}
+          {/* Cone photo — z-10, negative margins so it bites into both text lines */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.18, ease: [0.25, 1, 0.5, 1] }}
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.95, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-10 overflow-hidden"
+            style={{
+              width: "clamp(160px, 26vw, 380px)",
+              aspectRatio: "3/4",
+              marginTop: "clamp(-1.5rem, -4.5vw, -4.5rem)",
+              marginBottom: "clamp(-1.5rem, -4.5vw, -4.5rem)",
+              boxShadow: "0 40px 100px oklch(0.10 0.02 55 / 0.22)",
+            }}
           >
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(1.3rem, 2.6vw, 2.2rem)",
-                letterSpacing: "-0.025em",
-                lineHeight: 1.15,
-                color: "var(--ink)",
-              }}
-            >
-              Homemade ice cream.<br />Adams Avenue. Since 2000.
-            </p>
-            <p className="mt-3 mb-8 text-base leading-relaxed" style={{ color: "var(--muted)", maxWidth: "36ch" }}>
-              No gimmicks. No mix-ins. Made and served by the family who makes it.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/flavors"
-                className="px-7 py-3.5 text-sm font-bold tracking-wider transition-opacity hover:opacity-85"
-                style={{ background: "var(--accent)", color: "var(--on-accent)", fontFamily: "var(--font-sans)" }}
-              >
-                SEE TODAY'S FLAVORS
-              </Link>
-              <Link
-                href="/location"
-                className="px-7 py-3.5 text-sm font-medium border transition-colors hover:border-ink"
-                style={{ borderColor: "var(--border)", color: "var(--ink)", fontFamily: "var(--font-sans)" }}
-              >
-                Hours & Location
-              </Link>
-            </div>
+            <Image
+              src="/images/cone-mar2026.jpg"
+              alt="A waffle cone from Mariposa Ice Cream"
+              fill
+              className="object-cover object-center"
+              priority
+              sizes="26vw"
+            />
           </motion.div>
 
-          {/* Press quotes — bottom */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-col gap-3"
+          {/* ICE CREAM — z-0, behind the photo */}
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-0 w-full text-center"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(3.5rem, 14.5vw, 14.5rem)",
+              letterSpacing: "-0.045em",
+              lineHeight: 0.88,
+              textTransform: "uppercase",
+              color: "var(--ink)",
+              whiteSpace: "nowrap",
+            }}
           >
+            ICE CREAM
+          </motion.p>
+
+        </div>
+
+        {/* Subline + CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.3 }}
+          className="flex flex-col items-center gap-5 mt-8 mb-12 px-6"
+        >
+          <p
+            className="text-base text-center"
+            style={{ color: "var(--muted)", maxWidth: "38ch" }}
+          >
+            No gimmicks. No mix-ins. Made and served by the same family for 26 years.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/flavors"
+              className="px-7 py-3.5 text-sm font-bold tracking-wider transition-opacity hover:opacity-85"
+              style={{ background: "var(--accent)", color: "var(--on-accent)", fontFamily: "var(--font-sans)" }}
+            >
+              SEE TODAY'S FLAVORS
+            </Link>
+            <Link
+              href="/location"
+              className="px-7 py-3.5 text-sm font-medium border transition-colors hover:border-ink"
+              style={{ borderColor: "var(--border)", color: "var(--ink)", fontFamily: "var(--font-sans)" }}
+            >
+              Hours & Location
+            </Link>
+          </div>
+
+          {/* Press quotes — side by side */}
+          <div className="flex flex-wrap justify-center gap-x-10 gap-y-3 mt-3">
             {[
               { outlet: "New York Times", quote: "A must-visit when in San Diego." },
               { outlet: "San Diego Magazine", quote: "Best Ice Cream in San Diego." },
             ].map((p) => (
-              <div key={p.outlet} className="flex items-start gap-4">
+              <div key={p.outlet} className="flex items-start gap-2.5">
                 <span
-                  className="text-[10px] font-bold uppercase tracking-[0.13em] shrink-0 mt-0.5 w-24"
+                  className="text-[9px] font-bold uppercase tracking-[0.12em] shrink-0 mt-0.5"
                   style={{ color: "var(--muted)" }}
                 >
                   {p.outlet}
                 </span>
-                <p className="text-sm font-semibold leading-snug wide" style={{ color: "var(--ink)" }}>
+                <p className="text-xs font-semibold" style={{ color: "var(--ink)" }}>
                   "{p.quote}"
                 </p>
               </div>
             ))}
-          </motion.div>
-        </div>
-
-        {/* Right: photo — NO padding, NO rounding, bleeds to all edges */}
-        <div className="relative min-h-[65vw] md:min-h-0 order-1 md:order-2">
-          <Image
-            src="/images/cone-mar2026.jpg"
-            alt="A waffle cone from Mariposa Ice Cream"
-            fill
-            className="object-cover object-center"
-            priority
-            sizes="(max-width: 768px) 100vw, 45vw"
-          />
-          {/* Left-edge blend for desktop */}
-          <div
-            className="absolute inset-0 hidden md:block pointer-events-none"
-            style={{ background: "linear-gradient(to right, var(--bg) 0%, transparent 18%)" }}
-          />
-        </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* ── Marquee ── */}
       <div
         className="overflow-hidden py-3.5"
-        style={{ background: "var(--accent)", borderTop: "1px solid var(--accent)" }}
+        style={{ background: "var(--accent)" }}
       >
         <div
           className="flex whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.18em]"
@@ -173,10 +202,10 @@ export default function Home() {
         />
         <FadeUp className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
           <p
-            className="text-white mb-6"
+            className="text-white mb-5"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(2.2rem, 5.5vw, 5.5rem)",
+              fontSize: "clamp(2rem, 5.5vw, 5.5rem)",
               letterSpacing: "-0.04em",
               lineHeight: 1.0,
               maxWidth: "16ch",
@@ -186,7 +215,7 @@ export default function Home() {
           </p>
           <p
             className="text-sm font-bold uppercase tracking-[0.18em]"
-            style={{ color: "oklch(0.82 0.030 55)" }}
+            style={{ color: "oklch(0.80 0.030 55)" }}
           >
             — New York Times
           </p>
@@ -200,19 +229,18 @@ export default function Home() {
         </FadeUp>
       </section>
 
-      {/* ── Flavors — 48 as background watermark ── */}
+      {/* ── Flavors — 48 as giant watermark ── */}
       <section style={{ background: "var(--surface)" }}>
         <div className="relative max-w-6xl mx-auto px-6 py-16 overflow-hidden">
-          {/* Giant watermark */}
+          {/* Giant watermark number */}
           <div
             aria-hidden
-            className="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none leading-none font-bold"
+            className="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none font-bold leading-none"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(12rem, 35vw, 34rem)",
-              color: "oklch(0.920 0.014 85)",
+              fontSize: "clamp(14rem, 38vw, 38rem)",
+              color: "oklch(0.918 0.014 85)",
               letterSpacing: "-0.06em",
-              lineHeight: 1,
             }}
           >
             48
@@ -241,12 +269,12 @@ export default function Home() {
               </div>
             </FadeUp>
 
-            {/* Photo strip — 3 images */}
+            {/* 3 photos */}
             <div className="grid grid-cols-3 gap-2 mb-10">
               {[
                 { src: "/images/blueberry-bowl.jpg", alt: "Blueberry ice cream" },
                 { src: "/images/raspberry-ripple.jpg", alt: "White chocolate raspberry ripple" },
-                { src: "/images/cone-mar2026.jpg", alt: "Waffle cone" },
+                { src: "/images/sundae.jpg", alt: "Mariposa sundae" },
               ].map((img, i) => (
                 <FadeUp key={img.src} delay={i * 0.07}>
                   <div className="relative overflow-hidden" style={{ aspectRatio: "4/5" }}>
@@ -300,7 +328,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Story — storefront full-height + text ── */}
+      {/* ── Story — storefront + walnut ── */}
       <section className="grid grid-cols-1 md:grid-cols-2">
         <div className="relative overflow-hidden" style={{ minHeight: "520px" }}>
           <Image
@@ -351,7 +379,7 @@ export default function Home() {
         </FadeUp>
       </section>
 
-      {/* ── Manifesto stats — typographic, no grid ── */}
+      {/* ── Manifesto stats ── */}
       <section style={{ background: "var(--bg)" }}>
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
           <FadeUp>
@@ -362,47 +390,42 @@ export default function Home() {
               Why it tastes different
             </p>
           </FadeUp>
-          <div className="space-y-0">
-            {[
-              { stat: "1/3 less sugar", note: "than commercial ice cream" },
-              { stat: "Half the air", note: "denser scoops — you pay for ice cream, not filler" },
-              { stat: "No eggs", note: "in most flavors — lighter, cleaner, Grandpa Pete's rule" },
-              { stat: "Local dairy", note: "sourced fresh weekly from California farms" },
-            ].map((f, i) => (
-              <FadeUp key={f.stat} delay={i * 0.06}>
-                <div
-                  className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 py-6 border-b"
-                  style={{ borderColor: "var(--border)" }}
+          {[
+            { stat: "1/3 less sugar", note: "than commercial ice cream" },
+            { stat: "Half the air", note: "denser scoops — you pay for ice cream, not filler" },
+            { stat: "No eggs", note: "in most flavors — lighter, cleaner, Grandpa Pete's rule" },
+            { stat: "Local dairy", note: "sourced fresh weekly from California farms" },
+          ].map((f, i) => (
+            <FadeUp key={f.stat} delay={i * 0.06}>
+              <div
+                className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 py-6 border-b"
+                style={{ borderColor: "var(--border)" }}
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(1.8rem, 4vw, 3.5rem)",
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1.0,
+                    color: "var(--accent)",
+                  }}
                 >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "clamp(1.8rem, 4vw, 3.5rem)",
-                      letterSpacing: "-0.03em",
-                      lineHeight: 1.0,
-                      color: "var(--accent)",
-                    }}
-                  >
-                    {f.stat}
-                  </span>
-                  <span
-                    className="text-base"
-                    style={{ color: "var(--muted)", fontFamily: "var(--font-sans)" }}
-                  >
-                    {f.note}
-                  </span>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
+                  {f.stat}
+                </span>
+                <span className="text-base" style={{ color: "var(--muted)", fontFamily: "var(--font-sans)" }}>
+                  {f.note}
+                </span>
+              </div>
+            </FadeUp>
+          ))}
         </div>
       </section>
 
-      {/* ── Two-up photos — raw, no captions, just the food ── */}
+      {/* ── Two-up photos ── */}
       <div className="grid grid-cols-2">
         {[
-          { src: "/images/sundae.jpg", alt: "A Mariposa sundae" },
           { src: "/images/blueberry-bowl.jpg", alt: "Blueberry ice cream" },
+          { src: "/images/cone-mar2026.jpg", alt: "Waffle cone" },
         ].map((img) => (
           <div key={img.src} className="relative overflow-hidden" style={{ aspectRatio: "1 / 1" }}>
             <Image src={img.src} alt={img.alt} fill className="object-cover hover:scale-[1.03] transition-transform duration-500" sizes="50vw" />
@@ -410,7 +433,7 @@ export default function Home() {
         ))}
       </div>
 
-      {/* ── Hours CTA bar ── */}
+      {/* ── Hours CTA ── */}
       <section style={{ background: "var(--accent)" }}>
         <div className="max-w-6xl mx-auto px-6 py-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
@@ -423,8 +446,7 @@ export default function Home() {
                 lineHeight: 1.0,
               }}
             >
-              3450 Adams Avenue<br className="sm:hidden" />
-              <span className="hidden sm:inline">, </span>Normal Heights
+              3450 Adams Avenue, Normal Heights
             </h2>
             <p className="mt-2 text-sm wide" style={{ color: "oklch(0.90 0.040 15)" }}>
               Thu – Sat 1pm – 9pm &nbsp;&middot;&nbsp; Sun 2pm – 8pm &nbsp;&middot;&nbsp; Mon – Wed Closed
